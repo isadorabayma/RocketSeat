@@ -8,7 +8,6 @@ const prisma = new PrismaClient()
 app.register(cors)
 
 // SELECIONA quais endereços teriam acesso ao back end ao inves de liberar para todos
-
 // app.register(cors, {
 //   origin: ['http.//localhost:3000']
 // })
