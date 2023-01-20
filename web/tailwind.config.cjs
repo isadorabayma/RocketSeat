@@ -5,7 +5,12 @@ module.exports = {
     './index.html'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        // colocar novas cores dentro do tailwind com o nome que você quiser "backg..."
+        background: '#09090A'
+      },
+    },
   },
   plugins: [],
 }
