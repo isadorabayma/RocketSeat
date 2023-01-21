@@ -39,8 +39,13 @@ export async function appRoutes(app: FastifyInstance) {
 
     const { date } = getDayParams.parse(request.query)
 
+    console.log('GET date', date);
+    
     const parsedDate = dayjs(date).startOf('day')
     const weekDay = parsedDate.get('day')
+
+    console.log('GET parsedDate', parsedDate);
+    console.log('GET parsedDate.toDate()', parsedDate.toDate());
 
     const possibleHabits = await prisma.habit.findMany({
       where: {
@@ -72,6 +77,77 @@ export async function appRoutes(app: FastifyInstance) {
       possibleHabits,
       completedHabits
     }
+  })
+
+  app.patch('/habits/:id/toggle', async (request) => {
+    const toggleHabitParams = z.object({
+      id: z.string().uuid(),
+      // date: z.coerce.string()
+    })
+
+    const { id } = toggleHabitParams.parse(request.params)
+    // const { date } = toggleHabitParams.parse(request.query)
+
+    // console.log('PATCH date', date);
+
+    // const parsedDate = dayjs(date).startOf('day')
+
+    // console.log('PATCH parsedDate', parsedDate);
+
+    const today = dayjs().startOf('day').toDate()
+
+    console.log('PATCH today', today);
+    // console.log('PATCH query', request.query.date);
+
+    let day = await prisma.day.findUnique({
+      where: {
+        // date: parsedDate.toDate(),
+        date: today,
+      }
+    })
+
+    if (!day) {
+      day = await prisma.day.create({
+        data:{
+          // date: parsedDate.toDate(),        
+          date: today,        
+        }
+      })
+    }
+
+    const dayHabit = await prisma.dayHabit.findUnique({
+      where: {
+        day_id_habit_id: {
+          day_id: day.id,
+          habit_id: id,
+        }
+      }
+    })
+
+    if(dayHabit) {
+      await prisma.dayHabit.delete({
+        where: {
+          id: dayHabit.id
+        }
+      })
+    } else {
+      await prisma.dayHabit.create({
+        data: {
+          day_id: day.id,
+          habit_id: id,
+        }
+      })
+    }
+  })
+
+  app.get('/summary',async () => {
+    const summary = await prisma.$queryRaw`
+        SELECT
+          D.id,
+          D.date
+        FROM days D
+    `
+    return summary
   })
 }
 
