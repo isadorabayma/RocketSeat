@@ -23,14 +23,6 @@ export function NewHabitForm() {
   }
 
   function handleToggleWeekDay(weekDay: number) {
-    // if (availableWeekDays.includes(day) ) {
-    //   const index = availableWeekDays.indexOf(day)
-    //   const newAvailableWeekDays = availableWeekDays.splice(index, 1)
-    //   setWeekDays(newAvailableWeekDays)
-    // } else {
-    //   const newAvailableWeekDays = availableWeekDays.push(day)
-    //   setWeekDays(newAvailableWeekDays)
-    // }
     if (weekDays.includes(weekDay)) {
       const newWeekDays = weekDays.filter(day => day !== weekDay)
       
