@@ -82,26 +82,16 @@ export async function appRoutes(app: FastifyInstance) {
   app.patch('/habits/:id/toggle', async (request) => {
     const toggleHabitParams = z.object({
       id: z.string().uuid(),
-      // date: z.coerce.string()
     })
 
     const { id } = toggleHabitParams.parse(request.params)
-    // const { date } = toggleHabitParams.parse(request.query)
-
-    // console.log('PATCH date', date);
-
-    // const parsedDate = dayjs(date).startOf('day')
-
-    // console.log('PATCH parsedDate', parsedDate);
 
     const today = dayjs().startOf('day').toDate()
 
     console.log('PATCH today', today);
-    // console.log('PATCH query', request.query.date);
 
     let day = await prisma.day.findUnique({
       where: {
-        // date: parsedDate.toDate(),
         date: today,
       }
     })
@@ -109,7 +99,6 @@ export async function appRoutes(app: FastifyInstance) {
     if (!day) {
       day = await prisma.day.create({
         data:{
-          // date: parsedDate.toDate(),        
           date: today,        
         }
       })
