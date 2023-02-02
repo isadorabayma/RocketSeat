@@ -3,8 +3,6 @@ import { SummaryTable } from './components/SummaryTable';
 import './styles/global.css';
 import './lib/dajs'
 
-// import { Habit } from "./components/Habit"
-  
 export function App() {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
