@@ -1,0 +1,15 @@
+{
+  "name": "habit-backend",
+  "version": 2,
+  "public": true,
+  "build": {
+    "src": "api/index.ts",
+    "use": "@vercel/node"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "dest": "api/index.ts"
+    }
+  ]
+}
