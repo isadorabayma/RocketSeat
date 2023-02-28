@@ -10,3 +10,11 @@
 <h2>Sobre o projeto:</h2>
 <h3>💜 React - React Native - TypeScript - NodeJS - Prisma - Fastify - SQLite - Expo 💜</h3>
 <i>Projeto realizado no período de 16 a 20 de Janeiro - 2023</i>
+
+## :memo: Licença
+
+Esse projeto está sob licença MIT.
+
+---
+
+Projeto realizado pela Rocketseat e feito e adaptado por Isadora Bayma. [LinkedIn](https://www.linkedin.com/in/isadora-bayma/)
