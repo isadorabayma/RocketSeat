@@ -1,15 +1,8 @@
 {
-  "name": "habit-backend",
-  "version": 2,
-  "public": true,
-  "build": {
-    "src": "api/index.ts",
-    "use": "@vercel/node"
-  },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
+  "rewrites": [
+      {
+          "source": "/(.*)",
+          "destination": "/api/serverless.js"
+      }
   ]
 }
