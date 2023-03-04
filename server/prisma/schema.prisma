@@ -1,13 +1,22 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
+// PRIMA - CONEXÃO COM BANCO https://www.prisma.io/docs/getting-started/setup-prisma/add-to-existing-project/relational-databases/connect-your-database-typescript-postgres
+// PRIMA - POSTGRESQL https://www.prisma.io/docs/concepts/database-connectors/postgresql
+// SUPABASE - INTEGRAÇÃO COM O PRIMA https://supabase.com/docs/guides/integrations/prisma
+// SUPABASE - BANCO DE DADOS https://app.supabase.com/project/bklbiriiegkrsgxhktcw/settings/database
+// VERCEL - FRONT https://rocket-seat-nine.vercel.app/
+// VERCEL - tutorial https://www.youtube.com/watch?v=Y-RoNF3Hd7I&ab_channel=HebertCisco
+
+
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Habit {
