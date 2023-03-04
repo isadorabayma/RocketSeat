@@ -39,19 +39,13 @@ export async function appRoutes(app: FastifyInstance) {
 
   app.get('/day', async (request) => {
     const getDayParams = z.object({
-      // date: z.date() ----> na verdade o valor vai vir em string e a vai ser necesário converter para o tipo date por isso é usada a função do zod abaixo
       date: z.coerce.date()
     })
 
     const { date } = getDayParams.parse(request.query)
 
-    // console.log('GET date', date);
-    
     const parsedDate = dayjs(date).startOf('day')
     const weekDay = parsedDate.get('day')
-
-    // console.log('GET parsedDate', parsedDate);
-    // console.log('GET parsedDate.toDate()', parsedDate.toDate());
 
     const possibleHabits = await prisma.habit.findMany({
       where: {
@@ -150,10 +144,8 @@ export async function appRoutes(app: FastifyInstance) {
             SELECT
               cast(count(*) as float)
             FROM habit_week_days HWD
-            -- JOIN habit Hnu
             WHERE
               HWD.week_day = cast(strftime('%w', D.date/1000.0, 'unixepoch') as int)
-              -- AND H.created_at <= D.date
           ) as amount
         FROM days D
     `
